@@ -22,5 +22,5 @@ jobs:
                   cd dist
                   git init
                   git add -A
-                  git commit -m "deploy: deploy app"
+                  git commit -m "deploy: 앱 gh-pages에 배포"
                   git push -f https://${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git master:gh-pages
