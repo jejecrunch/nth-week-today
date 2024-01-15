@@ -5,13 +5,17 @@
   <article class="wrapper">
     <div id="l1"><h2>오늘은 올해의<p><span id="week">{{ weeks }}</span>주차</p></h2></div>
     {{ "\n" }}
-    <div id="l2"><p id="secondLine"><span id="fewDayPassed">{{ past_day }}</span>일 지남</p></div>
-    <div id="l3"><p id="secondLine"><span id="fewDayLeft">{{ future_day }}</span>일 남음</p></div>
+    <div id="l2"><p id="secondLine">1월 1일로부터 <span id="fewDayPassed">{{ past_day }}</span>일 지남</p></div>
+    <div id="l3"><p id="secondLine">12월 31일까지 <span id="fewDayLeft">{{ future_day }}</span>일 남음</p></div>
   </article>
+  <footer>
+    <a href="https://github.com/jejecrunch" target="_blank">jejecrunch</a> all rights reserved. Copyright 2024.
+  </footer>
 </template>
  
 <script>
 export default {
+  
   data() {
     return {
       nowTime: "",
@@ -22,12 +26,10 @@ export default {
   },
   created() {
     const now = new Date();
-        const [year, month, date] = [now.getFullYear(), now.getMonth()+1, now.getDate()]
-        const weekList = new Array("일", "월", "화", "수", "목", "금", "토");
-        const week = weekList[now.getDay()];
-        const [hour, minute, second] = [now.getHours(), now.getMinutes(), now.getSeconds()]
+    const [year, month, date] = [now.getFullYear(), now.getMonth()+1, now.getDate()]
+    const [hour, minute, second] = [now.getHours(), now.getMinutes(), now.getSeconds()]
 
-        this.timestamp = `${year}년 ${month}월 ${date}일 ${week}요일 ${hour < 9 ? "0"+hour:hour}:${minute < 9 ? "0"+minute:minute}:${second < 9 ? "0"+second:second}`;
+    this.timestamp = `${year}년 ${month}월 ${date}일 ${hour < 9 ? "0"+hour:hour}:${minute < 9 ? "0"+minute:minute}:${second < 9 ? "0"+second:second}`;
 
     this.setDate();
     const oneJan = new Date(now.getFullYear(),0,1);
@@ -41,11 +43,16 @@ export default {
     setInterval(this.nowTimes.bind(this), 1000)
   },
   methods: {
+      getDayToKor(n) {
+        const weekList = new Array("일", "월", "화", "수", "목", "금", "토");
+        return weekList[n];
+      },
       setDate(){
         const now = new Date();
         const year = now.getFullYear()
         const month = now.getMonth() + 1
         let date = now.getDate()
+        const day = this.getDayToKor(now.getDay());
         let hh = now.getHours()
         let mm = now.getMinutes()
         let ss = now.getSeconds() < 10 ? "0"+now.getSeconds():now.getSeconds()
@@ -53,13 +60,14 @@ export default {
              'year' : year
              , 'month' : month
              , 'date' : date
+             , 'day' : day
              , 'hh' : hh
              , 'mm' : mm
              , 'ss' : ss
       }
       },
       nowTimes(){
-          this.nowTime = this.setDate().year + "년 " + this.setDate().month + "월 " + this.setDate().date + "일 " + this.setDate().hh + "시 " + this.setDate().mm + "분 " + this.setDate().ss + "초";
+          this.nowTime = this.setDate().year + "년 " + this.setDate().month + "월 " + this.setDate().date + "일 " + this.setDate().day + "요일 "+ this.setDate().hh + "시 " + this.setDate().mm + "분 " + this.setDate().ss + "초";
       }
   }
 };
@@ -74,6 +82,14 @@ header {
 article {
     padding: 2em;
     border: 0.4em solid rgba(255,255,255,5)
+}
+footer {
+  margin-top: 1em;
+  text-align: center;
+}
+footer a {
+  color: #eee;
+  font-weight: 700;
 }
 .wrapper {
     max-width: 20em;
