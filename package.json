@@ -1,6 +1,7 @@
 {
   "name": "nth-week-today",
-  "version": "0.1.0",
+  "homepage": "jejecrunch.github.io/nth-week-today",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
