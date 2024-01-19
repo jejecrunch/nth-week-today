@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import NthWeek from './components/NthWeek.vue'
+import NthWeek from '@/components/NthWeek.vue'
 
 export default {
   name: 'App',
