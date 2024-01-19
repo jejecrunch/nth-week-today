@@ -20,6 +20,7 @@ jobs:
                   git config --global user.name "jejecrunch"
                   git config --global init.defaultBranch master
                   cd ../dist
+                  ls
                   git init
                   git add -A
                   git commit -m "deploy: 앱 gh-pages에 배포"
