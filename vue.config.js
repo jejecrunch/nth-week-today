@@ -3,7 +3,7 @@ module.exports = defineConfig({
     transpileDependencies: true,
     publicPath: "/nth-week-today/",
     assetsDir: "../assets",
-    outputDir: "../dist",
+    outputDir: "./dist",
     pages: {
         index: {
             entry: "src/main.js",
